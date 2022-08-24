@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const Post = require("../models/Post");
 
+//get all Blogs from database
 router.get("/", async (req, res) => {
   try {
     const posts = await Post.find();
@@ -12,6 +13,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+//post blog to databse
 router.post("/", (req, res) => {
   const post = new Post({
     title: req.body.title,
@@ -28,6 +30,7 @@ router.post("/", (req, res) => {
     });
 });
 
+//get a specific blog
 router.get("/:postId", async (req, res) => {
   try {
     const posts = await Post.findById(req.params.postId);
@@ -37,6 +40,7 @@ router.get("/:postId", async (req, res) => {
   }
 });
 
+//delete a specific blog from databse
 router.delete("/:postId", async (req, res) => {
   try {
     const deletedPosts = await Post.remove({ _id: req.params.postId });
@@ -46,6 +50,7 @@ router.delete("/:postId", async (req, res) => {
   }
 });
 
+//update a specific blog
 router.patch("/:postId", async (req, res) => {
   try {
     const updatedPosts = await Post.updateOne(
